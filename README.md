@@ -140,12 +140,10 @@ This script is released under the [MIT License](https://opensource.org/licenses/
 
 ## Author
 
-**Nicolas Peredo**  
+**Nicolas Peredo, PhD**  
+Image Analysis Expert
 VIB BioImaging Core Leuven - Center for Brain and Disease Research  
 Nikon Center of Excellence  
-Campus Gasthuisberg - ON5 - Room 04.367  
-Herestraat 49 - Box 62  
-3000 Leuven, Belgium
 
 ## References
 
