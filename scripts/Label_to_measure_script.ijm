@@ -7,16 +7,15 @@
 
  
 if (label_columnName == "Axon ID") {
-	csv_file = "Pooled_results_neurites.csv";
 	type = "_Neurites_labelled.tif";	
 }
 else {
-	csv_file = "Pooled_results_synapses.csv";
 	type = "_Synapses.tif";
 }
 
 //Open the pooled results table
 open(csv_file_path);
+csv_file = Table.title;
 
 //Create directory to stored metric labelled images
 File.makeDirectory(dir + File.separator + "Metric_images");
@@ -24,8 +23,8 @@ File.makeDirectory(dir + File.separator + "Metric_images");
 //Get image filelist
 file_list = getFilesList(dir, type);
 
-//for (files = 0; files < file_list.length; files++) {
-for (files = 0; files < 1; files++) {
+for (files = 0; files < file_list.length; files++) {
+//for (files = 0; files < 1; files++) {
 	file = file_list[files];
 	open(dir + File.separator + file);
 	
@@ -64,8 +63,17 @@ for (files = 0; files < 1; files++) {
 	run("Set Label Map", "colormap=" + lut + " background=Black");
 	resetMinAndMax();
 	
+	//Correct name to avoid / in the feature number as it is interpreted as a path
+	slashIndex = indexOf(feature_byuser, "/");
+	if (slashIndex != -1) {
+		feature_corrected = replace(feature_byuser, "/", "_");
+	}
+	else {
+		feature_corrected = feature_byuser;
+	}
+
 	//Save images
-	saveAs("Tiff", dir + File.separator + "Metric_images/" + file_basename + "_" + feature_byuser);
+	saveAs("Tiff", dir + File.separator + "Metric_images"  + File.separator + file_basename + "_" + feature_corrected + ".tif");
 	
 	//Close open images
 	close("*");
